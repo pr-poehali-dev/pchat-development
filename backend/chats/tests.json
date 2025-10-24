@@ -1,0 +1,28 @@
+{
+  "tests": [
+    {
+      "name": "Create private chat",
+      "method": "POST",
+      "body": {
+        "type": "private",
+        "creator_id": 1,
+        "member_ids": [2]
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get user chats",
+      "method": "GET",
+      "path": "/?user_id=1",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "chats": "array"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

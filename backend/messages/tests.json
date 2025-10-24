@@ -1,0 +1,28 @@
+{
+  "tests": [
+    {
+      "name": "Send message to chat",
+      "method": "POST",
+      "body": {
+        "chat_id": 1,
+        "sender_id": 1,
+        "content": "Hello World!"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Get messages for chat",
+      "method": "GET",
+      "path": "/?chat_id=1",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "messages": "array"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
