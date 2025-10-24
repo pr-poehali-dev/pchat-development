@@ -1,0 +1,14 @@
+{
+  "tests": [
+    {
+      "name": "Find user by username",
+      "method": "GET",
+      "path": "/?username=testuser123",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "user": "object"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

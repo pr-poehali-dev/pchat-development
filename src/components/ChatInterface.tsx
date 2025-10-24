@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import ChatList from './ChatList';
 import ChatWindow from './ChatWindow';
 import SettingsPanel from './SettingsPanel';
+import CreateChatDialog from './CreateChatDialog';
+import CreateGroupDialog from './CreateGroupDialog';
 import Icon from './ui/icon';
 import { Button } from './ui/button';
 
@@ -42,6 +44,8 @@ export default function ChatInterface({ user, onLogout, theme, setTheme }: ChatI
   const [chats, setChats] = useState<Chat[]>([]);
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
   const [showSettings, setShowSettings] = useState(false);
+  const [showCreateChat, setShowCreateChat] = useState(false);
+  const [showCreateGroup, setShowCreateGroup] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -65,13 +69,11 @@ export default function ChatInterface({ user, onLogout, theme, setTheme }: ChatI
   };
 
   const handleNewChat = () => {
-    const otherUsername = prompt('Введите username собеседника:');
-    if (!otherUsername) return;
+    setShowCreateChat(true);
   };
 
   const handleNewGroup = () => {
-    const groupName = prompt('Введите название группы:');
-    if (!groupName) return;
+    setShowCreateGroup(true);
   };
 
   return (
@@ -147,6 +149,20 @@ export default function ChatInterface({ user, onLogout, theme, setTheme }: ChatI
           onLogout={onLogout}
         />
       )}
+
+      <CreateChatDialog
+        open={showCreateChat}
+        onClose={() => setShowCreateChat(false)}
+        userId={user.id}
+        onChatCreated={loadChats}
+      />
+
+      <CreateGroupDialog
+        open={showCreateGroup}
+        onClose={() => setShowCreateGroup(false)}
+        userId={user.id}
+        onGroupCreated={loadChats}
+      />
     </div>
   );
 }
